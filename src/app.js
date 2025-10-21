@@ -5,7 +5,6 @@ const { ACTIVITY_TYPE } = require('./constants');
 const Player = require('./classes/Player');
 const VoiceStateUpdater = require('./classes/VoiceStateUpdater');
 const PlayerPresenceTemplater = require('./classes/presence/PlayerPresenceTemplater');
-const { GatewayIntentBits } = require('discord.js');  // Import GatewayIntentBits
 
 const config = new ConfigProvider({
   env: process.env,
@@ -48,13 +47,7 @@ const client = new ExtendedClient({
   presence: {
     refreshInterval: null,
     type: config.get('PRESENCE_TYPE')
-  },
-  intents: [                                              // Added this block
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildVoiceStates,  // Required for voice connections
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent // if needed for commands
-  ]
+  }
 });
 
 client.player = new Player(client);
